@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Test",
+            "request": "launch",
+            "mainClass": "main.frigon.Test",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MainFrame",
+            "request": "launch",
+            "mainClass": "main.frigon.MainFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LogFrame",
+            "request": "launch",
+            "mainClass": "main.frigon.LogFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Log",
+            "request": "launch",
+            "mainClass": "main.frigon.Log",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorld",
+            "request": "launch",
+            "mainClass": "main.frigon.HelloWorld"
+        }
+    ]
+}
