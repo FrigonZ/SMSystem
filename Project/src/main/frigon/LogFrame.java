@@ -7,8 +7,19 @@ import javax.swing.*;
 public class LogFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    int preX = 0;
+    int preY = 0;
 
     public LogFrame() {
+
+        JButton btLog;
+        JButton btExit;
+        JButton btMini;
+        JLabel lbChange;
+        JTextField tfUser;
+        JPasswordField pfPass;
+        ImagePanel ipBg = new ImagePanel(new ImageIcon("src//main//res//images//bg.png"));
+
         setSize(400, 300);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -20,86 +31,27 @@ public class LogFrame extends JFrame {
                 System.exit(0);
             }
         });
-
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                preX = e.getX();
+                preY = e.getY();
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int nowX = e.getXOnScreen();
+                int nowY = e.getYOnScreen();
+                setLocation(nowX - preX, nowY - preY);
+            }
+        });
         ImageIcon logo = new ImageIcon("src//main//res//icons//logo.png");
         setIconImage(logo.getImage());
 
-        //背景label
-        ImageIcon icBg = new ImageIcon("src//main//res//images//bg1.png");//bg。png为备用原版背景
-        JLabel lbBg = new JLabel(icBg);
-        lbBg.setBounds(0, 0, 400, 155);
-
-        //用户名栏
-        JTextField tfUser = new JTextField("Username");
-        tfUser.setBounds(50, 160, 300, 35);
-
-        //密码栏
-        JPasswordField pfPass = new JPasswordField();
-        pfPass.setBounds(50, 200, 300, 35);
-
-        //登录按钮
-        JButton btLog = new JButton(new ImageIcon("src//main//res//images//log.png"));
-        btLog.setBounds(50, 240, 300, 35);
-        btLog.setBorderPainted(false);
-        btLog.addActionListener(new ActionListener(){
-        
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //先检验用户名，密码是否为空
-                if(tfUser.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Please enter your username", "Log", JOptionPane.WARNING_MESSAGE);
-                }
-                else{
-                    if(pfPass.getPassword().length<1){
-                        JOptionPane.showMessageDialog(null, "Please enter your password", "Log", JOptionPane.WARNING_MESSAGE);
-                    }
-                    else{
-                        //登录验证，密码修改由LogController控制
-                        int n = LogController.log(tfUser.getText().toString(),pfPass.getPassword().toString());
-                        if(n == 1)
-                            dispose();
-                        pfPass.setText("");
-                        //输入密码后清空密码栏
-                    }
-                }
-            }
-        });
-
-        //忘记，更换密码入口
-        JLabel lbChange = new JLabel("Change password");
-        lbChange.setBounds(240, 270, 125, 30);
-        lbChange.setForeground(Color.BLUE);
-        lbChange.addMouseListener(new MouseListener(){
-        //字体在被点击时变色，交互更加突出
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                lbChange.setForeground(Color.BLUE);
-            }
-        
-            @Override
-            public void mousePressed(MouseEvent e) {
-                lbChange.setForeground(Color.BLACK);
-            }
-        
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-        
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                
-            }
-        });
 
         //右上角退出button
-        ImageIcon icExit = new ImageIcon("src//main//res//icons//exit.png");
-        JButton btExit = new JButton(icExit);
+        btExit = new JButton(new ImageIcon("src//main//res//icons//exit.png"));
         btExit.setBounds(370, 0, 30, 30);
         btExit.setMargin(new Insets(0, 0, 0, 0));
         btExit.setBorderPainted(false);
@@ -113,12 +65,95 @@ public class LogFrame extends JFrame {
             }
         });
 
+        //最小化button
+        btMini = new JButton("src//main//res//icons//exit.png");
+        btMini.setBounds(340, 0, 30, 30);
+        btMini.setMargin(new Insets(0, 0, 0, 0));
+        btMini.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setExtendedState(JFrame.ICONIFIED);
+            }
+        });
+
+        //用户名栏
+        tfUser = new JTextField("用户名");
+        tfUser.setBounds(50, 160, 300, 35);
+
+        //密码栏
+        pfPass = new JPasswordField();
+        pfPass.setBounds(50, 200, 300, 35);
+
+        //登录按钮
+        btLog = new JButton(new ImageIcon("src//main//res//images//log.png"));
+        btLog.setBounds(50, 240, 300, 35);
+        btLog.setBorderPainted(false);
+        btLog.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //先检验用户名，密码是否为空
+                if(tfUser.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "请输入学号", "Log", JOptionPane.WARNING_MESSAGE);
+                }
+                else{
+                    if(pfPass.getPassword().length<1){
+                        JOptionPane.showMessageDialog(null, "请输入密码", "Log", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        //登录验证，密码修改由LogController控制
+                        int n = LogController.log(tfUser.getText().toString(),pfPass.getPassword().toString());
+                        if(n == 1)
+                            dispose();
+                        pfPass.setText("");
+                        //输入密码后清空密码栏
+                    }
+                }
+            }
+        });
+
+         //忘记，更换密码入口
+         lbChange = new JLabel("更改密码");
+         lbChange.setBounds(295, 270, 75, 30);
+         lbChange.setForeground(Color.BLUE);
+         lbChange.addMouseListener(new MouseListener(){
+         //字体在被点击时变色，交互更加突出
+             @Override
+             public void mouseReleased(MouseEvent e) {
+                 lbChange.setForeground(Color.BLUE);
+             }
+         
+             @Override
+             public void mousePressed(MouseEvent e) {
+                 lbChange.setForeground(Color.BLACK);
+             }
+         
+             @Override
+             public void mouseExited(MouseEvent e) {
+ 
+             }
+         
+             @Override
+             public void mouseEntered(MouseEvent e) {
+ 
+             }
+         
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 
+             }
+         });
+
+        ipBg.setBounds(0, 0, 400, 155);
+        ipBg.add(btExit);
+        ipBg.add(btMini);
+
         add(btLog);
         add(tfUser);
         add(pfPass);
         add(lbChange);
-        add(lbBg);
-        add(btExit);
+        add(ipBg);
     }
     public static void main(String[] args) {
         new LogFrame().setVisible(true);

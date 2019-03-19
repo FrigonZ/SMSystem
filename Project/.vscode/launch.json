@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - TestFrame",
+            "request": "launch",
+            "mainClass": "main.frigon.TestFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Test",
             "request": "launch",
             "mainClass": "main.frigon.Test",

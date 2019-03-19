@@ -4,14 +4,15 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class MainFrame extends JFrame{
+public class TestFrame extends JFrame{
 
     private static final long serialVersionUID = 1L;
     JButton btExit,btMini,btMax;
     int preX = 0;
     int preY = 0;
+    
+    public TestFrame(){
 
-    public MainFrame() {
         ImagePanel ipTitle = new ImagePanel(new ImageIcon("src//main//res//images//title.png"));
         ipTitle.setSize(1200, 100);
         setSize(1200, 800);
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame{
         ipTitle.add(btMax);
     }
 
-    public static void on() {
-        new MainFrame().setVisible(true);
+    public static void main(String[] args) {
+        new TestFrame().setVisible(true);
     }
 }
