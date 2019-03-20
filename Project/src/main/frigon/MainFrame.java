@@ -90,8 +90,8 @@ public class MainFrame extends JFrame{
 
         btRe = new JButton();
         btRe.setBounds(width-60, 0, 30, 30);
-        btRe.setIcon(new ImageIcon("src//main//res//icons//max.png"));
-        btRe.setRolloverIcon(new ImageIcon("src//main//res//icons//max_red.png"));
+        btRe.setIcon(new ImageIcon("src//main//res//icons//re.png"));
+        btRe.setRolloverIcon(new ImageIcon("src//main//res//icons//re_red.png"));
         btRe.setMargin(new Insets(0, 0, 0, 0));
         btRe.setBorder(null);
         btRe.setContentAreaFilled(false);
