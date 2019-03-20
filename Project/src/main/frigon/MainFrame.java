@@ -11,15 +11,20 @@ public class MainFrame extends JFrame{
     JButton btMini;
     JButton btMax;
     JButton btRe;
+    JButton btChat;
+    JButton btFile;
+    JButton btRate;
+    JButton btInfo;
+    JButton btLog;
+    ImagePanel ipTitle;
+    JPanel pnLeft;
+    JPanel pnRight;
     int width = 1200;
     int height = 800;
     int preX = 0;
     int preY = 0;
 
     public MainFrame() {
-
-        ImagePanel ipTitle = new ImagePanel(new ImageIcon("src//main//res//images//title.png"));
-        ipTitle.setSize(1200, 100);
 
         setSize(1200, 800);
         setLayout(null);
@@ -32,7 +37,6 @@ public class MainFrame extends JFrame{
             }
         });
 
-        ipTitle.setLocation(0, 0);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
@@ -49,6 +53,20 @@ public class MainFrame extends JFrame{
                 setLocation(nowX - preX, nowY - preY);
             }
         });
+
+        ipTitle = new ImagePanel(new ImageIcon("src//main//res//images//title.png"));
+        ipTitle.setSize(width, 100);
+        ipTitle.setLocation(0, 0);
+
+        pnLeft = new JPanel();
+        pnLeft.setSize(75, height);
+        pnLeft.setLocation(0, 100);
+        pnLeft.setBackground(new Color(255, 255, 255));
+
+        pnRight = new JPanel();
+        pnRight.setSize(width-75,height-100);
+        pnRight.setLocation(75, 100);
+        pnRight.setLayout(new CardLayout());
 
         btExit = new JButton();
         btExit.setIcon(new ImageIcon("src//main//res//icons//exit.png"));
@@ -81,7 +99,9 @@ public class MainFrame extends JFrame{
                 btMax.setVisible(false);
                 btRe.setVisible(true);
                 width = getWidth();
+                height = getHeight();
                 ipTitle.setSize(width,100);
+                pnLeft.setSize(75, height);
                 btExit.setLocation(width-30, 0);
                 btRe.setLocation(width-60, 0);
                 btMini.setLocation(width-90, 0);
@@ -104,7 +124,9 @@ public class MainFrame extends JFrame{
                 btMax.setVisible(true);
                 setSize(1200,800);
                 width = getWidth();
+                height = getHeight();
                 ipTitle.setSize(width,100);
+                pnLeft.setSize(75, height);
                 btExit.setLocation(width-30, 0);
                 btMax.setLocation(width-60, 0);
                 btMini.setLocation(width-90, 0);
@@ -127,6 +149,9 @@ public class MainFrame extends JFrame{
         });
 
         add(ipTitle);
+        add(pnLeft);
+        add(pnRight);
+
         ipTitle.add(btExit);
         ipTitle.add(btMax);
         ipTitle.add(btRe);
