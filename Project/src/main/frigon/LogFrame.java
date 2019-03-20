@@ -51,7 +51,9 @@ public class LogFrame extends JFrame {
 
 
         //右上角退出button
-        btExit = new JButton(new ImageIcon("src//main//res//icons//exit.png"));
+        btExit = new JButton();
+        btExit.setIcon(new ImageIcon("src//main//res//icons//exit.png"));
+        btExit.setRolloverIcon(new ImageIcon("src//main//res//icons//exit_red.png"));
         btExit.setBounds(370, 0, 30, 30);
         btExit.setMargin(new Insets(0, 0, 0, 0));
         btExit.setBorderPainted(false);
@@ -66,7 +68,9 @@ public class LogFrame extends JFrame {
         });
 
         //最小化button
-        btMini = new JButton(new ImageIcon("src//main//res//icons//mini.png"));
+        btMini = new JButton();
+        btMini.setIcon(new ImageIcon("src//main//res//icons//mini.png"));
+        btMini.setRolloverIcon(new ImageIcon("src//main//res//icons//mini_red.png"));
         btMini.setBounds(340, 0, 30, 30);
         btMini.setMargin(new Insets(0, 0, 0, 0));
         btMini.setBorder(null);
@@ -88,9 +92,12 @@ public class LogFrame extends JFrame {
         pfPass.setBounds(50, 200, 300, 35);
 
         //登录按钮
-        btLog = new JButton(new ImageIcon("src//main//res//images//log.png"));
+        btLog = new JButton();
+        btLog.setIcon(new ImageIcon("src//main//res//images//log.png"));
+        btLog.setRolloverIcon(new ImageIcon("src//main//res//images//log_highlight.png"));
         btLog.setBounds(50, 240, 300, 35);
         btLog.setBorderPainted(false);
+        getRootPane().setDefaultButton(btLog);
         btLog.addActionListener(new ActionListener(){
         
             @Override
@@ -115,37 +122,37 @@ public class LogFrame extends JFrame {
             }
         });
 
-         //忘记，更换密码入口
-         lbChange = new JLabel("更改密码");
-         lbChange.setBounds(295, 270, 75, 30);
-         lbChange.setForeground(Color.BLUE);
-         lbChange.addMouseListener(new MouseListener(){
-         //字体在被点击时变色，交互更加突出
-             @Override
-             public void mouseReleased(MouseEvent e) {
-                 lbChange.setForeground(Color.BLUE);
-             }
-         
-             @Override
-             public void mousePressed(MouseEvent e) {
-                 lbChange.setForeground(Color.BLACK);
-             }
-         
-             @Override
-             public void mouseExited(MouseEvent e) {
+        //忘记，更换密码入口
+        lbChange = new JLabel("更改密码");
+        lbChange.setBounds(295, 270, 75, 30);
+        lbChange.setForeground(Color.BLUE);
+        lbChange.addMouseListener(new MouseListener(){
+        //字体在被点击时变色，交互更加突出
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lbChange.setForeground(Color.BLUE);
+            }
+        
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbChange.setForeground(Color.BLACK);
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) {
  
-             }
+            }
          
-             @Override
-             public void mouseEntered(MouseEvent e) {
+            @Override
+            public void mouseEntered(MouseEvent e) {
  
-             }
+            }
          
-             @Override
-             public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
                  
-             }
-         });
+            }
+        });
 
         ipBg.setBounds(0, 0, 400, 155);
         ipBg.add(btExit);
