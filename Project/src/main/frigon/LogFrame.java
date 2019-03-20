@@ -69,12 +69,7 @@ public class LogFrame extends JFrame {
 
         //最小化button
         btMini = new JButton();
-        btMini.setIcon(new ImageIcon("src//main//res//icons//mini.png"));
-        btMini.setRolloverIcon(new ImageIcon("src//main//res//icons//mini_red.png"));
-        btMini.setBounds(340, 0, 30, 30);
-        btMini.setMargin(new Insets(0, 0, 0, 0));
-        btMini.setBorder(null);
-        btMini.setContentAreaFilled(false);
+        
         btMini.addActionListener(new ActionListener(){
         
             @Override
