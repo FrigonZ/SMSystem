@@ -10,6 +10,7 @@ public class IconButton extends JButton{
     private static final long serialVersionUID = 1L;
     ImageIcon preIcon;
     ImageIcon nowIcon;
+    ImageIcon aftIcon;
 
     public IconButton(ImageIcon pre,ImageIcon now){
         super();
@@ -31,5 +32,9 @@ public class IconButton extends JButton{
         setBorderPainted(false);
         setBorder(null);
         setContentAreaFilled(false);
+    }
+
+    public IconButton(ImageIcon pre,ImageIcon now,ImageIcon aft){
+        super();
     }
 }
