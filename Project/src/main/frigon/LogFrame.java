@@ -46,19 +46,14 @@ public class LogFrame extends JFrame {
                 setLocation(nowX - preX, nowY - preY);
             }
         });
+
         ImageIcon logo = new ImageIcon("src//main//res//icons//logo.png");
         setIconImage(logo.getImage());
 
 
         //右上角退出button
-        btExit = new JButton();
-        btExit.setIcon(new ImageIcon("src//main//res//icons//exit.png"));
-        btExit.setRolloverIcon(new ImageIcon("src//main//res//icons//exit_red.png"));
+        btExit = new IconButton(new ImageIcon("src//main//res//icons//exit.png"), new ImageIcon("src//main//res//icons//exit_red.png"));
         btExit.setBounds(370, 0, 30, 30);
-        btExit.setMargin(new Insets(0, 0, 0, 0));
-        btExit.setBorderPainted(false);
-        btExit.setBorder(null);
-        btExit.setContentAreaFilled(false);
         btExit.addActionListener(new ActionListener(){
         
             @Override
@@ -68,8 +63,8 @@ public class LogFrame extends JFrame {
         });
 
         //最小化button
-        btMini = new JButton();
-        
+        btMini = new IconButton(new ImageIcon("src//main//res//icons//mini.png"), new ImageIcon("src//main//res//icons//mini_red.png"));
+        btMini.setBounds(340, 0, 30, 30);
         btMini.addActionListener(new ActionListener(){
         
             @Override
@@ -87,11 +82,8 @@ public class LogFrame extends JFrame {
         pfPass.setBounds(50, 200, 300, 35);
 
         //登录按钮
-        btLog = new JButton();
-        btLog.setIcon(new ImageIcon("src//main//res//images//log.png"));
-        btLog.setRolloverIcon(new ImageIcon("src//main//res//images//log_highlight.png"));
+        btLog = new IconButton(new ImageIcon("src//main//res//images//log.png"), new ImageIcon("src//main//res//images//log_highlight.png"));
         btLog.setBounds(50, 240, 300, 35);
-        btLog.setBorderPainted(false);
         getRootPane().setDefaultButton(btLog);
         btLog.addActionListener(new ActionListener(){
         

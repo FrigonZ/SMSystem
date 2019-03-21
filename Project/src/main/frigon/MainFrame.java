@@ -61,21 +61,32 @@ public class MainFrame extends JFrame{
         pnLeft = new JPanel();
         pnLeft.setSize(75, height);
         pnLeft.setLocation(0, 100);
-        pnLeft.setBackground(new Color(255, 255, 255));
+        pnLeft.setBackground(new Color(18, 150, 219));
+        pnLeft.setLayout(null);
+
+        btChat = new IconButton(new ImageIcon("src//main//res//icons//chat_b.png"),new ImageIcon("src//main//res//icons//chat.png"));
+        btChat.setSize(45, 45);
+        btChat.setLocation(15, 15);
+
+        btInfo = new IconButton(new ImageIcon("src//main//res//icons//info_b.png"),new ImageIcon("src//main//res//icons//info.png"));
+        btInfo.setSize(45, 45);
+        btInfo.setLocation(15, 75);
+
+        btFile = new IconButton(new ImageIcon("src//main//res//icons//file_b.png"),new ImageIcon("src//main//res//icons//file.png"));
+        btFile.setSize(45, 45);
+        btFile.setLocation(15, 135);
+
+        btRate = new IconButton(new ImageIcon("src//main//res//icons//rate_b.png"),new ImageIcon("src//main//res//icons//rate.png"));
+        btRate.setSize(45, 45);
+        btRate.setLocation(15, 195);
 
         pnRight = new JPanel();
         pnRight.setSize(width-75,height-100);
         pnRight.setLocation(75, 100);
         pnRight.setLayout(new CardLayout());
 
-        btExit = new JButton();
-        btExit.setIcon(new ImageIcon("src//main//res//icons//exit.png"));
-        btExit.setRolloverIcon(new ImageIcon("src//main//res//icons//exit_red.png"));
+        btExit = new IconButton(new ImageIcon("src//main//res//icons//exit.png"), new ImageIcon("src//main//res//icons//exit_red.png"));
         btExit.setBounds(width-30, 0, 30, 30);
-        btExit.setMargin(new Insets(0, 0, 0, 0));
-        btExit.setBorderPainted(false);
-        btExit.setBorder(null);
-        btExit.setContentAreaFilled(false);
         btExit.addActionListener(new ActionListener(){
         
             @Override
@@ -84,13 +95,8 @@ public class MainFrame extends JFrame{
             }
         });
 
-        btMax = new JButton();
+        btMax = new IconButton(new ImageIcon("src//main//res//icons//max.png"), new ImageIcon("src//main//res//icons//max_red.png"));
         btMax.setBounds(width-60, 0, 30, 30);
-        btMax.setIcon(new ImageIcon("src//main//res//icons//max.png"));
-        btMax.setRolloverIcon(new ImageIcon("src//main//res//icons//max_red.png"));
-        btMax.setMargin(new Insets(0, 0, 0, 0));
-        btMax.setBorder(null);
-        btMax.setContentAreaFilled(false);
         btMax.addActionListener(new ActionListener(){
         
             @Override
@@ -108,13 +114,8 @@ public class MainFrame extends JFrame{
             }
         });
 
-        btRe = new JButton();
+        btRe = new IconButton(new ImageIcon("src//main//res//icons//re.png"), new ImageIcon("src//main//res//icons//re_red.png"));
         btRe.setBounds(width-60, 0, 30, 30);
-        btRe.setIcon(new ImageIcon("src//main//res//icons//re.png"));
-        btRe.setRolloverIcon(new ImageIcon("src//main//res//icons//re_red.png"));
-        btRe.setMargin(new Insets(0, 0, 0, 0));
-        btRe.setBorder(null);
-        btRe.setContentAreaFilled(false);
         btRe.setVisible(false);
         btRe.addActionListener(new ActionListener(){
         
@@ -133,13 +134,8 @@ public class MainFrame extends JFrame{
             }
         });
 
-        btMini = new JButton();
-        btMini.setIcon(new ImageIcon("src//main//res//icons//mini.png"));
-        btMini.setRolloverIcon(new ImageIcon("src//main//res//icons//mini_red.png"));
+        btMini = new IconButton(new ImageIcon("src//main//res//icons//mini.png"), new ImageIcon("src//main//res//icons//mini_red.png"));
         btMini.setBounds(width-90, 0, 30, 30);
-        btMini.setMargin(new Insets(0, 0, 0, 0));
-        btMini.setBorder(null);
-        btMini.setContentAreaFilled(false);
         btMini.addActionListener(new ActionListener(){
         
             @Override
@@ -156,6 +152,11 @@ public class MainFrame extends JFrame{
         ipTitle.add(btMax);
         ipTitle.add(btRe);
         ipTitle.add(btMini);
+
+        pnLeft.add(btChat);
+        pnLeft.add(btInfo);
+        pnLeft.add(btFile);
+        pnLeft.add(btRate);
     }
 
     public static void on() {
