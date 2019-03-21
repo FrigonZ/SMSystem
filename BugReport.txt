@@ -1,0 +1,1 @@
+Wrong icons are showed when buttons are pressed.
