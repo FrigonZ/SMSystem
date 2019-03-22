@@ -1,6 +1,6 @@
 package main.ui;
 
-import main.frigon.LogController;
+import main.control.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
