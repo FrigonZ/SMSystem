@@ -1,5 +1,6 @@
 package main.frigon;
 
+import main.ui.MainFrame;
 import javax.swing.JOptionPane;
 
 public class LogController {
