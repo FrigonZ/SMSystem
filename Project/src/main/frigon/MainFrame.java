@@ -19,6 +19,14 @@ public class MainFrame extends JFrame{
     ImagePanel ipTitle;
     JPanel pnLeft;
     JPanel pnRight;
+    JPanel pnChat;
+    JPanel pnFile;
+    JPanel pnInfo;
+    JPanel pnRate;
+    ImageIcon iiChatb,iiChat;
+    ImageIcon iiInfob,iiInfo;
+    ImageIcon iiFileb,iiFile;
+    ImageIcon iiRateb,iiRate;
     int width = 1200;
     int height = 800;
     int preX = 0;
@@ -54,6 +62,9 @@ public class MainFrame extends JFrame{
             }
         });
 
+        ImageIcon logo = new ImageIcon("src//main//res//icons//logo.png");
+        setIconImage(logo.getImage());
+
         ipTitle = new ImagePanel(new ImageIcon("src//main//res//images//title.png"));
         ipTitle.setSize(width, 100);
         ipTitle.setLocation(0, 0);
@@ -64,26 +75,103 @@ public class MainFrame extends JFrame{
         pnLeft.setBackground(new Color(18, 150, 219));
         pnLeft.setLayout(null);
 
-        btChat = new IconButton(new ImageIcon("src//main//res//icons//chat_b.png"),new ImageIcon("src//main//res//icons//chat.png"));
-        btChat.setSize(45, 45);
-        btChat.setLocation(15, 15);
+        pnChat = new JPanel();
 
-        btInfo = new IconButton(new ImageIcon("src//main//res//icons//info_b.png"),new ImageIcon("src//main//res//icons//info.png"));
-        btInfo.setSize(45, 45);
-        btInfo.setLocation(15, 75);
+        pnInfo = new JPanel();
 
-        btFile = new IconButton(new ImageIcon("src//main//res//icons//file_b.png"),new ImageIcon("src//main//res//icons//file.png"));
-        btFile.setSize(45, 45);
-        btFile.setLocation(15, 135);
+        pnFile = new JPanel();
 
-        btRate = new IconButton(new ImageIcon("src//main//res//icons//rate_b.png"),new ImageIcon("src//main//res//icons//rate.png"));
-        btRate.setSize(45, 45);
-        btRate.setLocation(15, 195);
+        pnRate = new JPanel();
 
-        pnRight = new JPanel();
+        CardLayout c = new CardLayout();
+        pnRight = new JPanel(c);
         pnRight.setSize(width-75,height-100);
         pnRight.setLocation(75, 100);
-        pnRight.setLayout(new CardLayout());
+        pnRight.add("chat",pnChat);
+        pnRight.add("info",pnInfo);
+        pnRight.add("file",pnFile);
+        pnRight.add("rate",pnRate);
+
+        iiChatb = new ImageIcon("src//main//res//icons//chat_b.png");
+        iiChat = new ImageIcon("src//main//res//icons//chat.png");
+        iiInfob = new ImageIcon("src//main//res//icons//info_b.png");
+        iiInfo = new ImageIcon("src//main//res//icons//info.png");
+        iiFileb = new ImageIcon("src//main//res//icons//file_b.png");
+        iiFile = new ImageIcon("src//main//res//icons//file.png");
+        iiRateb = new ImageIcon("src//main//res//icons//rate_b.png");
+        iiRate = new ImageIcon("src//main//res//icons//rate.png");
+
+        btChat = new IconButton(iiChat,iiChat);
+        btChat.setSize(45, 45);
+        btChat.setLocation(15, 15);
+        btChat.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.show(pnRight,"chat");
+                btChat.setIcon(iiChat);
+                btInfo.setIcon(iiInfob);
+                btFile.setIcon(iiFileb);
+                btRate.setIcon(iiRateb);
+            }
+        });
+
+        btInfo = new IconButton(iiInfob,iiInfo);
+        btInfo.setSize(45, 45);
+        btInfo.setLocation(15, 75);
+        btInfo.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.show(pnRight,"info");
+                btChat.setIcon(iiChatb);
+                btInfo.setIcon(iiInfo);
+                btFile.setIcon(iiFileb);
+                btRate.setIcon(iiRateb);
+            }
+        });
+
+        btFile = new IconButton(iiFileb,iiFile);
+        btFile.setSize(45, 45);
+        btFile.setLocation(15, 135);
+        btFile.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.show(pnRight,"file");
+                btChat.setIcon(iiChatb);
+                btInfo.setIcon(iiInfob);
+                btFile.setIcon(iiFile);
+                btRate.setIcon(iiRateb);
+            }
+        });
+
+        btRate = new IconButton(iiRateb,iiRate);
+        btRate.setSize(45, 45);
+        btRate.setLocation(15, 195);
+        btRate.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.show(pnRight,"rate");
+                btChat.setIcon(iiChatb);
+                btInfo.setIcon(iiInfob);
+                btFile.setIcon(iiFileb);
+                btRate.setIcon(iiRate);
+            }
+        });
+
+        btLog = new IconButton(new ImageIcon("src//main//res//icons//out_b.png"),new ImageIcon("src//main//res//icons//out.png"));
+        btLog.setSize(45, 45);
+        btLog.setLocation(15, 255);
+        btLog.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                LogFrame.on();
+            }
+        });
 
         btExit = new IconButton(new ImageIcon("src//main//res//icons//exit.png"), new ImageIcon("src//main//res//icons//exit_red.png"));
         btExit.setBounds(width-30, 0, 30, 30);
@@ -157,6 +245,7 @@ public class MainFrame extends JFrame{
         pnLeft.add(btInfo);
         pnLeft.add(btFile);
         pnLeft.add(btRate);
+        pnLeft.add(btLog);
     }
 
     public static void on() {

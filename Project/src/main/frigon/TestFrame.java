@@ -7,70 +7,68 @@ import javax.swing.*;
 public class TestFrame extends JFrame{
 
     private static final long serialVersionUID = 1L;
-    JButton btExit,btMini,btMax;
-    int preX = 0;
-    int preY = 0;
+    String[] name = { "1", "2", "3", "4", "5" };
     
     public TestFrame(){
 
-        ImagePanel ipTitle = new ImagePanel(new ImageIcon("src//main//res//images//title.png"));
-        ipTitle.setSize(1200, 100);
         setSize(1200, 800);
-        setLayout(null);
         setUndecorated(true);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e){
                 System.exit(0);
             }
         });
-        ipTitle.setLocation(0, 0);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e){
-                preX = e.getX();
-                preY = e.getY();
-            }
-        });
-        addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int nowX = e.getXOnScreen();
-                int nowY = e.getYOnScreen();
-                setLocation(nowX - preX, nowY - preY);
-            }
-        });
-        btExit = new JButton("exit");
-        btExit.addActionListener(new ActionListener(){
-        
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        btMax = new JButton("max");
-        btMax.setBounds(0, 0, 50, 50);
-        btMax.addActionListener(new ActionListener(){
-        
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
-                ipTitle.setSize(getWidth(),100);
-            }
-        });
-        btMini = new JButton("mini");
-        btMini.addActionListener(new ActionListener(){
-        
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setExtendedState(JFrame.ICONIFIED);
-            }
-        });
 
-        add(ipTitle);
-        ipTitle.add(btMax);
-        
+        CardLayout c = new CardLayout();
+        JPanel p1 = new JPanel(c);
+        JPanel p2 = new JPanel();
+        for (int i = 0; i < name.length; i++) {
+			p1.add(name[i], new Button(name[i]));
+		}
+ 
+		// 控制显示上一张的按钮
+		Button previous = new Button("上一张");
+		previous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.previous(p1);
+			}
+		});
+		// 控制显示下一张的按钮
+		Button next = new Button("下一张");
+		next.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.next(p1);
+			}
+		});
+		// 控制显示第一张的按钮
+		Button first = new Button("第一张");
+		first.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.first(p1);
+			}
+		});
+		// 控制显示最后一张的按钮
+		Button last = new Button("最后一张");
+		last.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.last(p1);
+			}
+		});
+		// 根据card名显示的按钮
+		Button third = new Button("第三张");
+		third.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.show(p1, "3");
+			}
+		});
+		p2.add(previous);
+		p2.add(next);
+		p2.add(first);
+		p2.add(last);
+        p2.add(third);
+        add(p1);// 默认添加到中间
+		add(p2, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {

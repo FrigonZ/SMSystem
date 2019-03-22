@@ -151,6 +151,11 @@ public class LogFrame extends JFrame {
         add(lbChange);
         add(ipBg);
     }
+
+    public static void on(){
+        new LogFrame().setVisible(true);
+    }
+
     public static void main(String[] args) {
         new LogFrame().setVisible(true);
     }
