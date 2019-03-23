@@ -19,10 +19,10 @@ public class MainFrame extends JFrame{
     ImagePanel ipTitle;
     JPanel pnLeft;
     JPanel pnRight;
-    JPanel pnChat;
-    JPanel pnFile;
-    JPanel pnInfo;
-    JPanel pnRate;
+    ChatPanel pnChat;
+    FilePanel pnFile;
+    InfoPanel pnInfo;
+    RatePanel pnRate;
     ImageIcon iiChatb,iiChat;
     ImageIcon iiInfob,iiInfo;
     ImageIcon iiFileb,iiFile;
@@ -75,14 +75,13 @@ public class MainFrame extends JFrame{
         pnLeft.setBackground(new Color(18, 150, 219));
         pnLeft.setLayout(null);
 
-        pnChat = new ChatPanel();
+        pnChat = new ChatPanel(getWidth()-75,getHeight()-100);
 
         pnInfo = new InfoPanel(getWidth()-75,getHeight()-100);
 
-        pnFile = new FilePanel();
-        pnFile.setSize(getWidth()-75,getHeight()-100);
+        pnFile = new FilePanel(getWidth()-75,getHeight()-100);
 
-        pnRate = new RatePanel();
+        pnRate = new RatePanel(getWidth()-75,getHeight()-100);
 
         CardLayout c = new CardLayout();
         pnRight = new JPanel(c);
@@ -193,13 +192,7 @@ public class MainFrame extends JFrame{
                 setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
                 btMax.setVisible(false);
                 btRe.setVisible(true);
-                width = getWidth();
-                height = getHeight();
-                ipTitle.setSize(width,100);
-                pnLeft.setSize(75, height);
-                btExit.setLocation(width-30, 0);
-                btRe.setLocation(width-60, 0);
-                btMini.setLocation(width-90, 0);
+                reFresh();
             }
         });
 
@@ -213,17 +206,7 @@ public class MainFrame extends JFrame{
                 btRe.setVisible(false);
                 btMax.setVisible(true);
                 setSize(1200,800);
-                width = getWidth();
-                height = getHeight();
-                ipTitle.setSize(width,100);
-                pnLeft.setSize(75, height);
-                btExit.setLocation(width-30, 0);
-                btMax.setLocation(width-60, 0);
-                btMini.setLocation(width-90, 0);
-                pnChat.setSize(getWidth()-75,getHeight()-100);
-                pnInfo.setSize(getWidth()-75,getHeight()-100);
-                pnFile.setSize(getWidth()-75,getHeight()-100);
-                pnRate.setSize(getWidth()-75,getHeight()-100);
+                reFresh();
             }
         });
 
@@ -260,11 +243,38 @@ public class MainFrame extends JFrame{
     public static void main(String[] args) {
         new MainFrame().setVisible(true);
     }
+
+    public void reFresh(){
+        width = getWidth();
+        height = getHeight();
+        ipTitle.setSize(width,100);
+        pnLeft.setSize(75, height);
+        btExit.setLocation(width-30, 0);
+        btRe.setLocation(width-60, 0);
+        btMax.setLocation(width-60, 0);
+        btMini.setLocation(width-90, 0);
+        pnChat.setSize(getWidth()-75,getHeight()-100);
+        pnInfo.setSize(getWidth()-75,getHeight()-100);
+        pnInfo.reFresh();
+        pnFile.setSize(getWidth()-75,getHeight()-100);
+        pnRate.setSize(getWidth()-75,getHeight()-100);
+    }    
 }
+
 
 class ChatPanel extends JPanel{
 
     private static final long serialVersionUID = 1L;
+
+    public ChatPanel(int x,int y){
+
+        setSize(x,y);
+        setLayout(null);
+    }
+
+    public void reFresh(){
+
+    }
 
 }
 
@@ -272,10 +282,15 @@ class FilePanel extends JPanel{
 
     private static final long serialVersionUID = 1L;
 
-    public FilePanel(){
+    public FilePanel(int x,int y){
 
+        setSize(x,y);
+        setLayout(null);
     }
 
+    public void reFresh(){
+
+    }
 }
 
 class InfoPanel extends JPanel{
@@ -335,8 +350,13 @@ class RatePanel extends JPanel{
 
     private static final long serialVersionUID = 1L;
 
-    public RatePanel(){
+    public RatePanel(int x,int y){
+
+        setSize(x,y);
+        setLayout(null);
+    }
+
+    public void reFresh(){
 
     }
-    
 }

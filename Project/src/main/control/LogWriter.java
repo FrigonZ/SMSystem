@@ -1,6 +1,6 @@
 package main.control;
 
-class InfoController implements Runnable{
+class LogWriter implements Runnable{
     public void run(){
         
     }
