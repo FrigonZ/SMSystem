@@ -1,1 +1,2 @@
-Wrong icons are showed when buttons are pressed.
+Wrong icons are showed when buttons are pressed.	finish
+About void "reFresh"
