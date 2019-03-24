@@ -1,5 +1,9 @@
 package main.ui;
 
+/*
+登录界面
+*/
+
 import main.control.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -23,15 +27,17 @@ public class LogFrame extends JFrame {
 
         setSize(400, 300);
         setLayout(null);
-        setLocationRelativeTo(null);
-        setUndecorated(true);
+        setLocationRelativeTo(null);//居中
+        setUndecorated(true);//去除菜单栏
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(false);//锁定大小
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e){
                 System.exit(0);
             }
         });
+
+        //监听鼠标，实现窗体拖拽
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
@@ -48,6 +54,7 @@ public class LogFrame extends JFrame {
             }
         });
 
+        //设置logo
         ImageIcon logo = new ImageIcon("src//main//res//icons//logo.png");
         setIconImage(logo.getImage());
 
@@ -154,6 +161,7 @@ public class LogFrame extends JFrame {
     }
 
     public static void on(){
+        //显示登陆界面
         new LogFrame().setVisible(true);
     }
 

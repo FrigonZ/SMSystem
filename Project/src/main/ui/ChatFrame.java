@@ -1,4 +1,7 @@
 package main.ui;
+/*
+单人聊天界面
+*/
 
 import javax.swing.JFrame;
 

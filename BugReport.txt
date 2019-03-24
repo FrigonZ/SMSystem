@@ -1,2 +1,4 @@
 Wrong icons are showed when buttons are pressed.	finish
-About void "reFresh"
+No tags for MainFrame and some others		finish
+About void "reFresh"				finish
+No way to add new com to cardlayout

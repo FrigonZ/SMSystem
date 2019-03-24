@@ -1,12 +1,15 @@
 package main.ui;
 
 import java.awt.Graphics;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel{
 
+    /*
+    自定义类imagepanel
+    实现设置panel的背景图片
+    */
     private ImageIcon imageIcon;
     private static final long serialVersionUID = 1L;
 
