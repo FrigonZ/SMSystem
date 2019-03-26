@@ -2,3 +2,4 @@ Wrong icons are showed when buttons are pressed.	finish
 No tags for MainFrame and some others		finish
 About void "reFresh"				finish
 No way to add new com to cardlayout
+MySQL connection error
