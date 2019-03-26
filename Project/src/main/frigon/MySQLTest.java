@@ -4,21 +4,15 @@ import java.sql.*;
 
 public class MySQLTest {
 
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/test";
-        String user = "root";
-        String password = "zxy199595";
-        try {
+    public static void main(String[] args)throws SQLException {
+        try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn;
-            try {
-                conn = DriverManager.getConnection(url, user, password);
-                System.out.println(conn);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } catch (ClassNotFoundException e) {
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
+        String myConnectionString = "jdbc:mysql://localhost:3306/test?"+ "useUnicode=yes&useSSL=false&serverTimezone=GMT";
+        Connection conn = DriverManager.getConnection(myConnectionString, "root", "zxy199595");
+        System.out.println(conn);
     }
 }
