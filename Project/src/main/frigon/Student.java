@@ -1,20 +1,20 @@
 package main.frigon;
 
-public class User{
+public class Student{
 
     private String account;
     private String name;
     private String password;
     private boolean power;//true == admin
 
-    public User(){
+    public Student(){
         account = null;
         name = null;
         password = null;
         power = false;
     }
 
-    public User(String account,String name,String password){
+    public Student(String account,String name,String password){
         this.account = account;
         this.name = name;
         this.password = password;

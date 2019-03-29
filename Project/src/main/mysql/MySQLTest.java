@@ -1,4 +1,4 @@
-package main.frigon;
+package main.mysql;
 
 import java.sql.*;
 

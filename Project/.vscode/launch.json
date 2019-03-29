@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Start",
+            "request": "launch",
+            "mainClass": "main.Start",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestFrame",
+            "request": "launch",
+            "mainClass": "main.ui.TestFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MySQLTest",
+            "request": "launch",
+            "mainClass": "main.frigon.MySQLTest",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MainFrame",
             "request": "launch",
             "mainClass": "main.ui.MainFrame",

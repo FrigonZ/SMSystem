@@ -278,10 +278,6 @@ public class MainFrame extends JFrame{
         new MainFrame().setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MainFrame().setVisible(true);
-    }
-
     public void reFresh(){
         //更改组件大小及位置，以实现适应效果
         width = getWidth();

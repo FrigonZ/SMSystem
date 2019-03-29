@@ -164,8 +164,4 @@ public class LogFrame extends JFrame {
         //显示登陆界面
         new LogFrame().setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new LogFrame().setVisible(true);
-    }
 }
