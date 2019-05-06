@@ -297,6 +297,11 @@ public class MainFrame extends JFrame{
         pnRate.setSize(getWidth()-75,getHeight()-100);
         pnRate.reFresh();
     }    
+
+    public static void main(String[] args) {
+        
+        new MainFrame().setVisible(true);
+    }
 }
 
 

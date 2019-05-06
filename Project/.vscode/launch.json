@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - FriendList",
+            "request": "launch",
+            "mainClass": "main.ui.FriendList",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MySQL",
+            "request": "launch",
+            "mainClass": "main.mysql.MySQL",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MySQLTest",
+            "request": "launch",
+            "mainClass": "main.mysql.MySQLTest",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "main.Main",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Start",
             "request": "launch",
             "mainClass": "main.Start",

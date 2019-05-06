@@ -4,8 +4,8 @@ package main.ui;
 登录界面
 */
 
-import main.control.*;
-import java.awt.*;
+import main.tcp.client.LogController;
+
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -20,7 +20,6 @@ public class LogFrame extends JFrame {
         JButton btLog;
         JButton btExit;
         JButton btMini;
-        JLabel lbChange;
         JTextField tfUser;
         JPasswordField pfPass;
         ImagePanel ipBg = new ImagePanel(new ImageIcon("src//main//res//images//bg.png"));
@@ -28,6 +27,7 @@ public class LogFrame extends JFrame {
         setSize(400, 300);
         setLayout(null);
         setLocationRelativeTo(null);//居中
+        
         setUndecorated(true);//去除菜单栏
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);//锁定大小
@@ -107,7 +107,9 @@ public class LogFrame extends JFrame {
                     }
                     else{
                         //登录验证，密码修改由LogController控制
-                        int n = LogController.log(tfUser.getText().toString(),pfPass.getPassword().toString());
+                        String username = tfUser.getText().toString();
+                        String password = new String(pfPass.getPassword());
+                        int n = LogController.log(username,password);
                         if(n == 1)
                             dispose();
                         pfPass.setText("");
@@ -117,37 +119,6 @@ public class LogFrame extends JFrame {
             }
         });
 
-        //忘记，更换密码入口
-        lbChange = new JLabel("更改密码");
-        lbChange.setBounds(295, 270, 75, 30);
-        lbChange.setForeground(Color.BLUE);
-        lbChange.addMouseListener(new MouseListener(){
-        //字体在被点击时变色，交互更加突出
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                lbChange.setForeground(Color.BLUE);
-            }
-        
-            @Override
-            public void mousePressed(MouseEvent e) {
-                lbChange.setForeground(Color.BLACK);
-            }
-        
-            @Override
-            public void mouseExited(MouseEvent e) {
- 
-            }
-         
-            @Override
-            public void mouseEntered(MouseEvent e) {
- 
-            }
-         
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                 
-            }
-        });
 
         ipBg.setBounds(0, 0, 400, 155);
         ipBg.add(btExit);
@@ -156,7 +127,6 @@ public class LogFrame extends JFrame {
         add(btLog);
         add(tfUser);
         add(pfPass);
-        add(lbChange);
         add(ipBg);
     }
 
