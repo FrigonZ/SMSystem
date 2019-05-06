@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class MySQL{
     private static final String url = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
@@ -95,6 +96,77 @@ public class MySQL{
         }
     }
 
+    public int getId(String account){
+        String sql = "select id from user where account = ?";
+        int id = 0;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, account);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                id = rs.getInt("id");
+            }
+            System.out.println(id);
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }finally{
+            close();
+        }
+    }
+
+    public String getData(int id){
+        String sql1 = "select name from user where id = ?";
+        String sql2 = "select account from user where id = ?";
+        String data = null;
+        try {
+            String data1 = null;
+            String data2 = null;
+            ps = conn.prepareStatement(sql1);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                data1 = rs.getString("name").strip();
+            }
+            ps = conn.prepareStatement(sql2);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                data2 = rs.getString("account").strip();
+            }
+            data = data1 + "&" + data2;
+            System.out.println(data);
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally{
+            close();
+        }
+    }
+
+    public int getRow(String sql){
+        try {
+            Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            rs = statement.executeQuery(sql);
+            rs.last();
+            int row = rs.getRow();
+            System.out.println(row);
+            return row;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }finally{
+            try {
+                this.conn.close();
+                this.rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void insert(String name,String notice){
         String sql = "insert into notice (admin,notice) values (?,?)";
         try {
@@ -124,6 +196,7 @@ public class MySQL{
 
     public static void main(String[] args) {
         MySQL mySQL = new MySQL();
-        mySQL.insert("name", "notice");
+        String sql = "select * from user";
+        mySQL.getRow(sql);
     }
 }

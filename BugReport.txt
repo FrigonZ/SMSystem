@@ -1,5 +1,9 @@
 Wrong icons are showed when buttons are pressed.	finish
 No tags for MainFrame and some others		finish
 About void "reFresh"				finish
-No way to add new com to cardlayout
-MySQL connection error
+No way to add new com to cardlayout			finish
+MySQL connection error				finish
+bond between ui and client				4
+personal chat					3
+rate function					2
+file						2

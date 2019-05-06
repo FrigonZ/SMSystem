@@ -8,6 +8,8 @@ import java.awt.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import main.mysql.MySQL;
+
 public class FriendList extends JPanel{
 
     private static final long serialVersionUID = 1L;
@@ -16,11 +18,17 @@ public class FriendList extends JPanel{
 
     public static void main(String[] args) {
         FriendNode group = new FriendNode("group");
-        FriendNode[] node = new FriendNode[15];
-        for(int i = 0;i < 15;i++){
-            node[i] = new FriendNode("name", i);
-            group.add(node[i]);
+        int n = new MySQL().getRow("select * from user");
+        int id = new MySQL().getId("2018004");
+        FriendNode[] node = new FriendNode[n];
+        for(int i = 1;i<=n;i++){
+            String str = new MySQL().getData(i);
+            String[] info = str.split("&");
+            node[i-1] = new FriendNode(info[0], i);
+            if(i != id)
+                group.add(node[i-1]);
         }
+
         tree = new JTree(group);
         tree.putClientProperty("JTree.lineStyle", "Horizontal");
         tree.setFont(new Font("微软雅黑", Font.PLAIN, 15));

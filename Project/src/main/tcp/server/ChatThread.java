@@ -10,7 +10,6 @@ public class ChatThread extends Thread{
     InputStream is;
     OutputStream os;
     PrintWriter pw;
-    int con = 1;
     private String username;
 
     public ChatThread(Socket socket){
@@ -27,12 +26,14 @@ public class ChatThread extends Thread{
             while(true){
                 String str = br.readLine();
                 System.out.println(str);
-                System.out.println("recieve:"+str);
-                String[] info = str.split("&");
-                System.out.println("msg ready");
-                ChatController.sendMsg(info[0], info[1]);
-                if(con == 0)
+                if(!str.equals("&&&")){
+                    System.out.println("recieve:"+str);
+                    String[] info = str.split("&");
+                    System.out.println("msg ready");
+                    ChatController.sendMsg(info[0], info[1]);
+                }else{
                     break;
+                }
             }
             socket.shutdownInput();
         } catch (Exception e) {
@@ -54,10 +55,6 @@ public class ChatThread extends Thread{
 
     public String getUser(){
         return username;
-    }
-
-    public void close(){
-        con = 0;
     }
 
     private void init(){

@@ -11,7 +11,6 @@ public class ChatClient extends Thread{
     private static PrintWriter pw = null;
     private static Socket socket = null;
     private static String user = null;
-    int con = 1;
 
     public ChatClient(){
         try {
@@ -44,11 +43,13 @@ public class ChatClient extends Thread{
         try {
             while(true){
                 String line = br.readLine();
-                System.out.println("data recieved");
-                System.out.println(line);
-                if(con == 0)
+                if(line != "&&&"){
+                    System.out.println("data recieved");
+                    System.out.println(line);
+                }else{
                     break;
                 }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
@@ -61,10 +62,6 @@ public class ChatClient extends Thread{
                 }
             }
         }
-    }
-
-    public void close(){
-        con = 0;
     }
 
     public void setUser(){
