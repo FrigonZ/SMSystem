@@ -1,24 +1,24 @@
 package main.tcp.client;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
-public class FriendList extends Thread{
 
-    String account;
-    Socket socket;
-    InputStream is;
-    OutputStream os;
+public class RateClient extends Thread{
+    
+    private static Socket socket = null;
+    private static InputStream is = null;
+    private static OutputStream os = null;
+    private static String ip = "127.0.0.1";
+    String data;
 
-    public FriendList(String account){
-        this.account = account;
+    public RateClient(String data){
         try {
-            socket = new Socket("127.0.0.1",10132);
+            this.data = data;
+            socket = new Socket(ip,10133);
             is = socket.getInputStream();
             os = socket.getOutputStream();
+            System.out.println("client start");
             start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,22 +27,15 @@ public class FriendList extends Thread{
 
     public void run(){
         try {
-            os.write(account.getBytes());
-            System.out.println("account sent"+account);
+            os.write(data.getBytes());
             socket.shutdownOutput();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            while(true){
-                String line = br.readLine();
-                if(line.equals("quit")){
-                    break;
-                }else{
-                    System.out.println(line);
-                }
-            }
+            String str = br.readLine();
+            System.out.println(str);
             socket.shutdownInput();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally{
+        }finally{
             if(socket != null){
                 try {
                     socket.close();
@@ -55,6 +48,6 @@ public class FriendList extends Thread{
     }
 
     public static void main(String[] args) {
-        new FriendList("abc");
+        new RateClient("1#name&str&choice1&choice2");
     }
 }

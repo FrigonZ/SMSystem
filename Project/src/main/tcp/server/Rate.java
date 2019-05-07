@@ -10,7 +10,7 @@ public class Rate{
     //匿名投票类
     Random random;
     int[] key;
-    String user;
+    String name;
     String str;
     Choice[] choice;
     Map<String ,String> map = new HashMap<String ,String>();
@@ -20,7 +20,7 @@ public class Rate{
         random = new Random();
         String[] info = msg.split("&");
         int n = info.length;
-        user = info[0];
+        name = info[0];
         str = info[1];
         choice = new Choice[n-2];
         for(int i = 0;i<n-2;i++){
@@ -37,6 +37,10 @@ public class Rate{
         shuffle();
         System.out.println(map.toString());
         System.out.println("Rate setted");
+    }
+
+    public String getName(){
+        return name;
     }
 
     public void shuffle(){

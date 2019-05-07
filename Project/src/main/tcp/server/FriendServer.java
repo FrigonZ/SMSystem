@@ -67,6 +67,7 @@ class FriendThread extends Thread{
                     pw.flush();
                 }
             }
+            pw.println("quit");
             socket.shutdownOutput();
         } catch (Exception e) {
             e.printStackTrace();

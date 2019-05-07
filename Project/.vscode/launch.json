@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - NoticeServer",
+            "request": "launch",
+            "mainClass": "main.tcp.server.NoticeServer",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - RateController",
             "request": "launch",
             "mainClass": "main.tcp.server.RateController",
