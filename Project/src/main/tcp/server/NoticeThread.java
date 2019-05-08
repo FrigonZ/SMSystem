@@ -54,5 +54,4 @@ public class NoticeThread extends Thread {
             e.printStackTrace();
         }
     }
-
 }
