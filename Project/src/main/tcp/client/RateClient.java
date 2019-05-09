@@ -4,13 +4,14 @@ import java.io.*;
 import java.net.Socket;
 
 
-public class RateClient extends Thread{
+public class RateClient{
     
     private static Socket socket = null;
     private static InputStream is = null;
     private static OutputStream os = null;
     private static String ip = "127.0.0.1";
     String data;
+    String str;
 
     public RateClient(String data){
         try {
@@ -19,22 +20,23 @@ public class RateClient extends Thread{
             is = socket.getInputStream();
             os = socket.getOutputStream();
             System.out.println("client start");
-            start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void run(){
+    public String sendMsg(){
         try {
             os.write(data.getBytes());
             socket.shutdownOutput();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String str = br.readLine();
+            str = br.readLine();
             System.out.println(str);
             socket.shutdownInput();
+            return str;
         } catch (Exception e) {
             e.printStackTrace();
+            return str;
         }finally{
             if(socket != null){
                 try {
@@ -48,6 +50,8 @@ public class RateClient extends Thread{
     }
 
     public static void main(String[] args) {
-        new RateClient("1#name&str&choice1&choice2");
+        //new RateClient("1#name&str&choice1&choice2");
+        new RateClient("2#测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试#2018004").sendMsg();
+
     }
 }

@@ -46,6 +46,7 @@ public class ChatFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "内容不可为空", "msg", JOptionPane.WARNING_MESSAGE);
                 }else{
                     String msg = tf.getText().toString();
+                    ta.append(msg+"\n");
                     sendMsg(msg);
                 }
             }

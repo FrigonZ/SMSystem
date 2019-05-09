@@ -13,6 +13,7 @@ public class Main{
     public static ChatClient cc;
     public static String user;
     public static String account;
+    public static boolean admin;
     public static Map<String ,ChatFrame> map = new HashMap<String ,ChatFrame>();
     public static void main(String[] args) {
         LogFrame.on();
@@ -35,5 +36,10 @@ public class Main{
     public static void setAccount(String account){
         Main.account = account;
         System.out.println("------------------account set :"+Main.account+"----------------");
+    }
+
+    public static void setAdmin(boolean flag){
+        admin = flag;
+        System.out.println("------------------account set :"+Main.admin+"----------------");
     }
 }

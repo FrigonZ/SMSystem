@@ -43,6 +43,15 @@ public class Rate{
         return name;
     }
 
+    public String getData(){
+        String data = name+"#"+str;
+        for(int i = 0;i < choice.length;i++){
+            data += "#";
+            data += choice[i].name;
+        }
+        return data;
+    }
+
     public void shuffle(){
         for (int i = 0; i < key.length; i++) {
             int s = (int)(Math.random()*key.length);

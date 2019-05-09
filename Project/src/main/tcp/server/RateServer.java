@@ -9,6 +9,7 @@ public class RateServer extends Thread{
 
         ServerSocket ss = null;
         try {
+            RateThread.setNew("测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试&str&choice1&choice2");
             ss = new ServerSocket(port);
             System.out.println("Server start");
             while(true){

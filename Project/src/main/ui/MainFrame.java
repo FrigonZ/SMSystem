@@ -5,10 +5,14 @@ package main.ui;
 */
 
 import java.awt.event.*;
+import java.io.File;
 import java.awt.*;
 import javax.swing.*;
 
+
+
 import main.Main;
+import main.tcp.client.UploadClient;
 
 public class MainFrame extends JFrame{
 
@@ -184,6 +188,7 @@ public class MainFrame extends JFrame{
         
             @Override
             public void actionPerformed(ActionEvent e) {
+                pnRate.update();
                 c.show(pnRight,"rate");
                 btChat.setIcon(iiChatb);
                 btInfo.setIcon(iiInfob);
@@ -380,17 +385,44 @@ class FilePanel extends JPanel{
 
     //文件模块
     private static final long serialVersionUID = 1L;
+    IconButton btUp,btDown;
     
-
     public FilePanel(int x,int y){
         setSize(x,y);
         setLayout(null);
+        ImageIcon iiUp = new ImageIcon("src//main//res//icons//UPLOAD.png");
+        btUp = new IconButton(iiUp);
+        btUp.setBounds(0, 0, getWidth()/2, getHeight());
+        btUp.addActionListener(new ActionListener(){
         
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showOpenDialog(null);
+                File file = fileChooser.getSelectedFile();
+                if(file != null){
+                    new UploadClient(file);
+                }
+            }
+        });
+        ImageIcon iiDown = new ImageIcon("src//main//res//icons//DOWNLOAD.png");
+        btDown = new IconButton(iiDown);
+        btDown.setBounds(getWidth()/2, 0, getWidth()/2, getHeight());
+        btDown.addActionListener(new ActionListener(){
         
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FileFrame().setVisible(true);
+            }
+        });
+
+        add(btUp);
+        add(btDown);
     }
 
     public void reFresh(){
-        //调整组件
+        btUp.setBounds(0, 0, getWidth()/2, getHeight());
+        btDown.setBounds(getWidth()/2, 0, getWidth()/2, getHeight());
     }
 }
 
@@ -398,7 +430,6 @@ class InfoPanel extends JPanel{
 
     //通知模块
     private static final long serialVersionUID = 1L;
-    CardLayout c = new CardLayout();
     JPanel pnBot;
     InfoList pnTop;
     JButton btNew;
@@ -425,7 +456,10 @@ class InfoPanel extends JPanel{
         
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NoticeFrame().setVisible(true);
+                if(Main.admin)
+                    new NoticeFrame().setVisible(true);
+                else
+                    JOptionPane.showMessageDialog(null, "admin only", "Wrong", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
@@ -453,16 +487,56 @@ class InfoPanel extends JPanel{
 class RatePanel extends JPanel{
 
     //投票模块
+    //通知模块
     private static final long serialVersionUID = 1L;
+    JPanel pnBot;
+    VoteList pnTop;
+    JButton btNew;
 
     public RatePanel(int x,int y){
 
         setSize(x,y);
         setLayout(null);
+
+        pnTop = new VoteList();
+        pnTop.getList();
+        pnTop.setSize(getWidth(),getHeight()-50);
+        pnTop.setLocation(0, 0);
+
+        pnBot = new JPanel();
+        pnBot.setSize(getWidth(),50);
+        pnBot.setLocation(0, getHeight()-50);
+
+
+        btNew = new JButton("新投票");
+        btNew.setSize(60, 30);
+        btNew.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Main.admin)
+                    new VoteFrame().setVisible(true);
+                else
+                    JOptionPane.showMessageDialog(null, "admin only", "Wrong", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        pnBot.add(btNew);
+
+        add(pnTop);
+        add(pnBot);
+    }
+
+    public void update(){
+        pnTop.getList();
     }
 
     public void reFresh(){
         //调整组件
+        pnTop.setSize(getWidth(),getHeight()-50);
+        pnTop.setLocation(0, 0);
+        pnBot.setSize(getWidth(),50);
+        pnBot.setLocation(0, getHeight()-50);
     }
 
     public static void main(String[] args) {

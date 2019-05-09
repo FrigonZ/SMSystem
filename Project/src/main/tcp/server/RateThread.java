@@ -85,12 +85,21 @@ public class RateThread extends Thread{
 
     private void getData()throws Exception{
         String data = "";
-        for(String key:rateMap.keySet()){
-            Rate rate = rateMap.get(key);
-            data = data+rate.toString()+"&";
+        if(rateMap.isEmpty()){
+            data = "0";
+        }else{
+            for(String key:rateMap.keySet()){
+                Rate rate = rateMap.get(key);
+                data = data+rate.getData()+"&";
+            }
+            data = data.substring(0, data.length()-1);
         }
-        data = data.substring(0, data.length()-1);
         os.write(data.getBytes());
+    }
+
+    public static void setNew(String msg){
+        Rate rate = new Rate(msg);
+        rateMap.put(rate.name, rate);
     }
 
     private void init(){

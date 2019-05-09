@@ -2,10 +2,8 @@ package main.tcp.client;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -13,32 +11,46 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 public class DownloadClient {
-    public void download(){
+
+    Map<String,File> map;
+    Socket s;
+
+    public String getList(){
         
         try {
             //连接到指定地址指定端口服务
-            Socket s = new Socket("127.0.0.1",10134);
+            s = new Socket("127.0.0.1",10134);
             //获取基于Socket的对象输入流(Map)
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
             //读取一个对象
-            Map<String,File> map = (Map<String,File>)ois.readObject();
+            map = (Map<String,File>)ois.readObject();
             //获取map集合中的键集
             Set<String> keys = map.keySet();
             //获取set对象的迭代器
             Iterator<String> it = keys.iterator();
             //迭代
+            String data = "";
             while(it.hasNext()){
                 //获取迭代器中的一个元素
                 String key = it.next();
                 //根据键获取值
                 File value = map.get(key);
-                System.out.println(key+"----"+value.getName());
+                data += value.getName()+"&";
             }
-            System.out.println("请输入需要下载的文件编号:");
-            //获取基于控制台标准输入流，读取指令
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String no = br.readLine();
+            data = data.substring(0, data.length()-1);
+            return data;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "false";
+        }
+    }
+
+    public void Download(String no){
+        try {
             //根据编号或许需要下载的文件的文件名
             String fname = map.get(no).getName();
             
@@ -58,9 +70,9 @@ public class DownloadClient {
             }
             System.out.println("下载完成!");
             getFile(b, "c:\\test\\down", fname);
+            JOptionPane.showMessageDialog(null, "Done", "Download", JOptionPane.INFORMATION_MESSAGE);
             s.close();
             bos.close();
-            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +110,4 @@ public class DownloadClient {
             }  
         }
     }  
-    public static void main(String[] args) {
-        new DownloadClient().download();
-    }
 }

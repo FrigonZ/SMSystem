@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - VoteFrame",
+            "request": "launch",
+            "mainClass": "main.ui.VoteFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FileFrame",
+            "request": "launch",
+            "mainClass": "main.ui.FileFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - NoticeFrame",
             "request": "launch",
             "mainClass": "main.ui.NoticeFrame",

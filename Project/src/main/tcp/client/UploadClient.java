@@ -6,11 +6,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 public class UploadClient extends Thread{
     String fileName;
+    File file;
     
-    public UploadClient(String file){
-        fileName = file;
+    public UploadClient(File file){
+        this.file = file;
+        fileName = file.getName();
         start();
     }
 
@@ -18,7 +22,6 @@ public class UploadClient extends Thread{
         Socket socket = null;
         try {
             socket = new Socket("127.0.0.1", 10135);
-            File file = new File(fileName);
             DataInputStream dis = new DataInputStream(new FileInputStream(file));
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(file.getName());
@@ -41,13 +44,11 @@ public class UploadClient extends Thread{
             dos.close();
             dis.close();
             socket.close();
+            JOptionPane.showMessageDialog(null, "Done", "Upload", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("done");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        new UploadClient("c:\\test\\up\\test.txt");
-    }
 }
