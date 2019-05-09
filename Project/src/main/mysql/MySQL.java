@@ -116,6 +116,36 @@ public class MySQL{
         }
     }
 
+    public String getNotice(int id){
+        String sql1 = "select admin from notice where id = ?";
+        String sql2 = "select notice from notice where id = ?";
+        String data = null;
+        try {
+            String data1 = null;
+            String data2 = null;
+            ps = conn.prepareStatement(sql1);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                data1 = rs.getString("admin").strip();
+            }
+            ps = conn.prepareStatement(sql2);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                data2 = rs.getString("notice").strip();
+            }
+            data = data1 + "&" + data2;
+            System.out.println(data);
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally{
+            close();
+        }
+    }
+
     public String getData(int id){
         String sql1 = "select name from user where id = ?";
         String sql2 = "select account from user where id = ?";
@@ -195,8 +225,6 @@ public class MySQL{
     }
 
     public static void main(String[] args) {
-        MySQL mySQL = new MySQL();
-        String sql = "select * from user";
-        mySQL.getRow(sql);
+        new MySQL().getRow("select * from notice");
     }
 }

@@ -10,8 +10,8 @@ import java.net.Socket;
 
 import main.mysql.MySQL;
 
-public class FriendServer {
-    public static void main(String[] args) {
+public class FriendServer extends Thread{
+    public void run() {
         final int port = 10132;
 
         ServerSocket ss = null;

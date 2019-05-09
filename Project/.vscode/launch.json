@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - NoticeFrame",
+            "request": "launch",
+            "mainClass": "main.ui.NoticeFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ChatFrame",
+            "request": "launch",
+            "mainClass": "main.ui.ChatFrame",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RatePanel",
+            "request": "launch",
+            "mainClass": "main.ui.RatePanel",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Test",
+            "request": "launch",
+            "mainClass": "main.Test",
+            "projectName": "Project_a03a2822"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - NoticeServer",
             "request": "launch",
             "mainClass": "main.tcp.server.NoticeServer",

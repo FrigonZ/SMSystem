@@ -3,8 +3,8 @@ package main.tcp.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class RateServer{
-    public static void main(String[] args) {
+public class RateServer extends Thread{
+    public void run() {
         final int port = 10133;
 
         ServerSocket ss = null;

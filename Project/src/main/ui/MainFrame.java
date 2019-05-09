@@ -8,6 +8,8 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+import main.Main;
+
 public class MainFrame extends JFrame{
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +37,10 @@ public class MainFrame extends JFrame{
     int height = 800;
     int preX = 0;
     int preY = 0;
+
+    public TextArea getTa(){
+        return pnChat.getTa();
+    }
 
     public MainFrame() {
 
@@ -145,6 +151,7 @@ public class MainFrame extends JFrame{
         
             @Override
             public void actionPerformed(ActionEvent e) {
+                pnInfo.update();
                 c.show(pnRight,"info");
                 btChat.setIcon(iiChatb);
                 btInfo.setIcon(iiInfo);
@@ -309,16 +316,63 @@ class ChatPanel extends JPanel{
 
     //聊天模块
     private static final long serialVersionUID = 1L;
+    TextArea ta;
+    TextField tf;
+    JButton btSend;
+    FriendList fl;
+
+    private void sendMsg(String msg){
+        Main.cc.sendMsg(msg);
+        tf.setText("");
+    }
 
     public ChatPanel(int x,int y){
 
         setSize(x,y);
         setLayout(null);
+
+        ta = new TextArea();
+        ta.setEditable(false);
+        ta.setBounds(0, 0, getWidth()-160, 3*getHeight()/4);
+
+        tf = new TextField();
+        tf.setBounds(0, 3*getHeight()/4+10, getWidth()-200, getHeight()/4-20);
+
+        btSend = new JButton("send");
+        btSend.setBounds(getWidth()-190, 3*getHeight()/4+10, 30, getHeight()/4-20);
+        btSend.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tf.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "内容不可为空", "msg", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    String msg = tf.getText().toString();
+                    sendMsg(msg);
+                }
+            }
+        });
+
+        fl = new FriendList();
+        fl.getList(Main.account);
+        fl.setBounds(getWidth()-150, 0, 150, getHeight());
+
+        add(ta);
+        add(tf);
+        add(btSend);
+        add(fl);
+    }
+
+    public TextArea getTa(){
+        return ta;
     }
 
     public void reFresh(){
         //组件调整
-
+        ta.setBounds(0, 0, getWidth()-160, 3*getHeight()/4);
+        tf.setBounds(0, 3*getHeight()/4+10, getWidth()-200, getHeight()/4-20);
+        btSend.setBounds(getWidth()-190, 3*getHeight()/4+10, 30, getHeight()/4-20);
+        fl.setBounds(getWidth()-150, 0, 150, getHeight());
     }
 }
 
@@ -326,11 +380,13 @@ class FilePanel extends JPanel{
 
     //文件模块
     private static final long serialVersionUID = 1L;
+    
 
     public FilePanel(int x,int y){
-
         setSize(x,y);
         setLayout(null);
+        
+        
     }
 
     public void reFresh(){
@@ -343,8 +399,9 @@ class InfoPanel extends JPanel{
     //通知模块
     private static final long serialVersionUID = 1L;
     CardLayout c = new CardLayout();
-    JPanel pnTop,pnBot;
-    JButton btNew,btFirst,btPre,btNext,btLast;
+    JPanel pnBot;
+    InfoList pnTop;
+    JButton btNew;
 
     public InfoPanel(int x,int y){
 
@@ -352,38 +409,34 @@ class InfoPanel extends JPanel{
         setLayout(null);
 
         //顶部导航栏
-        pnTop = new JPanel(c);
+        pnTop = new InfoList();
+        pnTop.getList();
         pnTop.setSize(getWidth(),getHeight()-50);
         pnTop.setLocation(0, 0);
 
-        //底部公告栏，cardlayout布局
         pnBot = new JPanel();
         pnBot.setSize(getWidth(),50);
         pnBot.setLocation(0, getHeight()-50);
 
-        btFirst = new JButton("第一条");
-        btFirst.setSize(60, 30);
-
-        btPre = new JButton("上一条");
-        btPre.setSize(60, 30);
 
         btNew = new JButton("新通知");
         btNew.setSize(60, 30);
+        btNew.addActionListener(new ActionListener(){
+        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NoticeFrame().setVisible(true);
+            }
+        });
 
-        btNext = new JButton("下一条");
-        btNext.setSize(60, 30);
-
-        btLast = new JButton("最后一条");
-        btLast.setSize(60, 30);
-
-        pnBot.add(btFirst);
-        pnBot.add(btPre);
         pnBot.add(btNew);
-        pnBot.add(btNext);
-        pnBot.add(btLast);
 
         add(pnTop);
         add(pnBot);
+    }
+
+    public void update(){
+        pnTop.getList();
     }
 
     public void reFresh(){
@@ -410,5 +463,9 @@ class RatePanel extends JPanel{
 
     public void reFresh(){
         //调整组件
+    }
+
+    public static void main(String[] args) {
+        new MainFrame().setVisible(true);
     }
 }

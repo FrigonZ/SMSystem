@@ -1,13 +1,14 @@
 package main.tcp.client;
 
-import main.ui.MainFrame;
+import main.Main;
 import javax.swing.JOptionPane;
 
 public class LogController {
+
     public static int log(String username,String password){
-        if(TcpClient.checkPass(username, password)){
-            MainFrame.on();
-            
+        if(LogClient.checkPass(username, password)){
+            Main.setAccount(username);
+            Main.begin();
             return 1;
         }
         else{

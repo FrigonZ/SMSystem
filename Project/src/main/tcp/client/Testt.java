@@ -4,5 +4,6 @@ public class Testt{
     public static void main(String[] args) {
         ChatClient cc = new ChatClient();
         cc.setUser("admin");
+        cc.sendMsg();
     }
 }

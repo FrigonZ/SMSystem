@@ -23,10 +23,10 @@ public class LogThread extends Thread{
             System.out.println("recieve:" + str);
             socket.shutdownInput();
             String[] info = str.split("&");
-            String reply = "0";
+            String reply = "1";
             MySQL mySQL = new MySQL();
             if(mySQL.log(info[0], info[1])){
-                reply = "1";
+                reply = new MySQL().checkName(info[0]);
             }
             os.write(reply.getBytes());
             socket.shutdownOutput();

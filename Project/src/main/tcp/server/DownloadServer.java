@@ -13,8 +13,8 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DownloadServer {
-    public static void main(String[] args) {
+public class DownloadServer extends Thread{
+    public void run() {
         File dir = new File("c:\\test");
         ServerSocket ss = null;
         try {

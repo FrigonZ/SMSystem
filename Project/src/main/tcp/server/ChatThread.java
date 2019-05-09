@@ -29,8 +29,17 @@ public class ChatThread extends Thread{
                 if(!str.equals("&&&")){
                     System.out.println("recieve:"+str);
                     String[] info = str.split("&");
-                    System.out.println("msg ready");
-                    ChatController.sendMsg(info[0], info[1]);
+                    if(info.length == 4){
+                        ChatController.addThread(this, info[0]);
+                    }
+                    if(info.length == 2){
+                        System.out.println("msg ready");
+                        ChatController.sendMsg(info[0], info[1]);
+                    }
+                    if(info.length == 3){
+                        System.out.println("msg ready");
+                        ChatController.sendMsg(info[0], info[1],info[2]);
+                    }
                 }else{
                     break;
                 }

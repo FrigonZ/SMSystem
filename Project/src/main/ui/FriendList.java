@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import main.Main;
 import main.mysql.MySQL;
 
 public class FriendList extends JPanel{
@@ -15,18 +16,23 @@ public class FriendList extends JPanel{
     private static final long serialVersionUID = 1L;
     private static JTree tree;
     
+    public FriendList(){
+        
+    }
 
-    public static void main(String[] args) {
+	public void getList(String account) {
         FriendNode group = new FriendNode("group");
         int n = new MySQL().getRow("select * from user");
-        int id = new MySQL().getId("2018004");
+        int id = new MySQL().getId(account);
         FriendNode[] node = new FriendNode[n];
         for(int i = 1;i<=n;i++){
             String str = new MySQL().getData(i);
             String[] info = str.split("&");
             node[i-1] = new FriendNode(info[0], i);
-            if(i != id)
+            if(i != id){
                 group.add(node[i-1]);
+                Main.map.put(info[0], new ChatFrame(info[0]));
+            }
         }
 
         tree = new JTree(group);
@@ -40,15 +46,21 @@ public class FriendList extends JPanel{
             public void valueChanged(TreeSelectionEvent e) {
                 FriendNode fn = (FriendNode) tree.getLastSelectedPathComponent();
                 if(fn.isLeaf()){
-                    new JFrame(fn.name).setVisible(true);
+                    Main.map.get(fn.name).setVisible(true);
                 }
             }
         });
         JScrollPane scrollPane=new JScrollPane();
         scrollPane.setViewportView(tree);
-        JFrame frame = new JFrame("Test");
-        frame.setSize(150, 600);
-        frame.add(scrollPane);
+        add(scrollPane);
+    }
+
+    public static void main(String[] args) {
+        FriendList fl = new FriendList();
+        fl.getList("2018004");
+        fl.setSize(150, 300);
+        JFrame frame = new JFrame();
+        frame.add(fl);
         frame.setVisible(true);
     }
 }

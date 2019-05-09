@@ -3,9 +3,9 @@ package main.tcp.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class NoticeServer{
+public class NoticeServer extends Thread{
 
-    public static void main(String[] args) {
+    public void run() {
         final int port = 10131;
         ServerSocket ss = null;
 

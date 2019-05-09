@@ -3,8 +3,8 @@ package main.tcp.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ChatServer{
-    public static void main(String[] args) {
+public class ChatServer extends Thread{
+    public void run() {
         final int port = 10130;
 
         ServerSocket ssChat = null;
